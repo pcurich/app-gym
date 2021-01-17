@@ -1,0 +1,41 @@
+<div class="container pt-5">
+  <div class="row">
+{{#each products }}
+<div class="col-4">
+  {{#if state}}
+  <div class="card border-success mb-3">
+    <div class="card-header">{{name}}</div>
+    <div class="card-body">
+      <h4 class="card-title">{{description}}</h4>
+      <p class="card-text">Precio: S/ {{price}} </p> 
+      <p class="card-text">Duración: {{duration}} {{sequence}}</p>
+    </div>
+    <div class="card-footer">
+      <div class="col-6">
+        <a href="/products/edit/{{_id}}" class="btn btn-success">Editar</a>
+      </div>
+    </div>
+  </div>
+  {{else}}
+  <div class="card border-danger mb-3">
+    <div class="card-header">{{name}}</div>
+    <div class="card-body">
+      <h4 class="card-title">{{description}}</h4>
+      <p class="card-text">Precio: S/ {{price}} </p> 
+      <p class="card-text">Duración: {{duration}} {{sequence}}</p>
+    </div>
+    <div class="card-footer">
+      <div class="col-6">
+        <a href="/products/edit/{{_id}}" class="btn btn-success">Editar</a>
+      </div>
+    </div>
+  </div>
+  {{/if}}
+    
+  </div>
+{{/each}}
+  </div>
+</div>
+
+
+

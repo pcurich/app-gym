@@ -1,0 +1,51 @@
+<div class="container pt-5">
+  <div class="row">
+{{#each customers }}
+<div class="col-4">
+  {{#if state}}
+  <div class="card border-success mb-3">
+    <div class="card-header">{{name}} {{lastName}}</div>
+    <div class="card-body">
+      <h4 class="card-title">{{dni}}</h4>
+      <p class="card-text">Inicio: {{startDate}} Fin:{{endDate}}</p>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </div>
+    <div class="card-footer text-muted row">
+      <div class="col-6">
+        <a href="/customers/edit/{{_id}}" class="btn btn-success">Editar</a>
+      </div>
+      <div class="col-6">
+        <a href="#" class="btn btn-primary">Plan</a>
+      </div>      
+    </div>
+  </div>
+  {{else}}
+  <div class="card border-danger mb-3">
+    <div class="card-header">{{name}} {{lastName}}</div>
+    <div class="card-body">
+      <h4 class="card-title">{{dni}}</h4>
+      <p class="card-text">Inicio: {{startDate}} Fin:{{endDate}}</p>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </div>
+    <div class="card-footer text-muted row">
+      <div class="col-6">
+        <a href="/customers/edit/{{_id}}" class="btn btn-success">Editar</a>
+      </div>
+      <div class="col-6">
+        <a href="#" class="btn btn-primary">Plan</a>
+      </div>      
+    </div>
+  </div>
+  {{/if}}
+    
+  </div>
+{{/each}}
+  </div>
+</div>
+
+
+

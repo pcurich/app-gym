@@ -1,0 +1,70 @@
+<div class="card border-secondary mb-3">
+  <div class="card-header">Datos del plan</div>
+  <div class="card-body">
+    <form action="/products/new-product" method="POST">
+      
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="name" class="col-sm-3 col-form-label">Nombre</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control form-control-sm" id="name" name="name" value="{{product.name}}" />
+          </div>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="price" class="col-sm-3 col-form-label">Precio</label>
+          <div class="col-sm-9">
+            <input type="number" name="price" min="0"  step="0.1" class="form-control form-control-sm" id="price" name="price" value="{{product.price}}" />
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-12">
+          <label for="description" class="col-sm-3 col-form-label">Description</label>
+          <div class="col-sm-10">
+            <textarea  class="form-control form-control-sm" rows="3" id="description" name="description" >{{product.description}}</textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="duration" class="col-sm-3 col-form-label">Duracion</label>
+          <div class="col-sm-9">
+            <input type="number" min="0" step="1" class="form-control" id="duration" name="duration" value="{{product.duration}}" />
+          </div>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="duration" class="col-sm-3 col-form-label">Secuencia</label>
+          <div class="col-sm-9">
+            <select class="form-control" id="sequence" name="sequence">
+              {{#select product.sequence}}
+                <option value="Dia">Dia</option>
+                <option value="Semana">Semana</option>
+                <option value="Mes">Mes</option>
+                <option value="Bimestre">Bimestre</option>
+                <option value="Trimestre">Trimestre</option>
+                <option value="Semestre">Semestre</option>
+                <option value="Anual">Anual</option>
+              {{/select}}
+              </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="state" class="col-sm-3 col-form-label">Estado</label>
+          <div class="col-sm-9">
+            <input type="checkbox" id="state" name="state" checked>
+          </div>
+        </div> 
+      </div>
+
+      <div class="form-group">
+        <button class="btn btn-primary btn-block" type="submit">Guardar</button>
+      </div>
+
+    </form>
+  </div>
+</div>
