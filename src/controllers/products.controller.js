@@ -29,19 +29,8 @@ ctrl.createNewProduct = async (req, res) => {
     });
   }else {
     try {
-      const newProduct = new Product({ name, price, description, duration, sequence});
-      newProduct.createdBy = req.user.id;
-      newProduct.updatedBy = req.user.id;
-      newProduct.deleted = false;
-      
-      if (!state) {
-        newProduct.state = false;  
-      }else{
-        newProduct.state = true;          
-      }
-
-      await newProduct.save();
-      req.flash("success_msg", "Plan creado satisfactoriamente");
+      await Product.findByIdAndUpdate(req.params.id,{ name, price, description, duration, sequence, updatedBy: req.user.id});
+      req.flash("success_msg", "Plan actualizado satisfactoriamente");
       res.redirect("/products");  
     } catch (error) {
       req.flash("error_msg", JSON.stringify(error));
