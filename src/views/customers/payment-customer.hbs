@@ -1,0 +1,113 @@
+
+  <div class="jumbotron">
+    <div class="container p-2">
+      <form action="/customers/addPayment/" method="POST">
+        <div class="form-group row">
+          <label for="amountPayed" class="col-sm-1 col-form-label">Monto</label>
+          <div class="col-sm-4">
+            <input type="text" name="amountPayed" id="amountPayed" class="form-control" style="border-bottom-color: black; border-bottom-width: 1px;" placeholder="{{customer.currentProduct.price}}"  autocomplete="off">
+          </div>
+          <label for="type" class="col-sm-1 col-form-label">Tipo</label>
+          <div class="col-sm-4">
+            <select class="form-control" id="type" name="type">
+                <option value="0">------</option>
+                <option value="Efectivo">Efectivo</option>
+                <option value="Tarjeta">Tarjeta</option>
+                <option value="Otro">Otro</option>
+              </select>
+          </div>
+          <input type="hidden" name="customerId" id="customerId" value="{{customer._id}}"/>
+          <input type="hidden" name="productId" id="productId" value="{{customer.currentProduct._id}}"/>
+          <div class="col-sm-2">
+            <button type="submit" class="btn btn-primary">Agregar</button> 
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+<div class="card border-secondary">
+  <div class="card-header">Datos del Socio </div>
+  <div class="card-body">
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="name" class="col-sm-3 col-form-label">Socio</label>
+        <div class="col-sm-9">
+          <code>{{customer.name}} {{customer.lastName}}</code>
+        </div>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="lastName" class="col-sm-3 col-form-label">Pagado</label>
+        <div class="col-sm-9">
+          <code>S/ {{customer.amountPayed}}</code>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="card-header">Datos del Plan</div>
+  <div class="card-body">
+    
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="name" class="col-sm-3 col-form-label">Plan</label>
+        <div class="col-sm-9">
+          <code>{{customer.currentProduct.name}} ({{customer.currentProduct.sequence}} {{customer.currentProduct.duration}})</code>
+        </div>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="lastName" class="col-sm-3 col-form-label">Costo</label>
+        <div class="col-sm-9">
+          <code>S/ {{customer.currentProduct.price}}</code>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="name" class="col-sm-3 col-form-label">Desde</label>
+        <div class="col-sm-9">
+          <code>{{moment customer.startDate loca=true format="YYYY-MM-DD HH:mm:ss"}}</code>
+        </div>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="lastName" class="col-sm-3 col-form-label">Hasta</label>
+        <div class="col-sm-9">
+          <code>{{moment customer.endDate loca=true format="YYYY-MM-DD HH:mm:ss"}}</code>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="card-header">Pagos realizados </div>
+  <div class="card-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Fecha</th>
+          <th scope="col">Registradp por</th>
+          <th scope="col">Metodo de pago</th>
+          <th scope="col">Monto</th>
+          <th scope="col">Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each customer.payments as |p|}}
+        <tr class="table-light">
+          <td>{{moment p.createAt local=true format="YYYY-MM-DD HH:mm:ss"}}</td>
+          <td>{{p.createdBy.name}}</td>
+          <td>{{p.type}}</td>
+          <td>S/ {{p.amountPayed}}</td>
+          <td>{{#if p.state}} Pago completo {{else}} pago parcial {{/if}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+      
+    </table>
+  </div>
+
+</div>

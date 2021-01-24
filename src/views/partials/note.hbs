@@ -1,0 +1,40 @@
+
+{{#if notes}}
+  <div class="card mx-auto mb-3">
+    <div class="card-body">
+      <a href="/customers/add-note/{{customerId}}" class="btn btn-info btn-block">Crear nota</a>
+    </div>
+  </div>
+  {{/if}}
+
+<div class="row">
+  {{#each notes}}
+  
+  <div class="col-md-3">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title d-flex justify-content-between align-items-center">
+          {{ title }} <a href="/customers/edit-note/{{_id}}"><i class="fas fa-edit"></i></a>
+        </h4>
+        <p>{{ description }} </p>
+        <p><code>{{ moment createdAt local=true format="YYYY-MM-DD HH:mm:ss" }} </code></p>
+        <p><code>{{ createdBy.name}}</code></p>
+        <!-- DELETE REQUEST -->
+        <form action="/customers/delete-note/{{_id}}?_method=DELETE" method="POST">
+          <input type="hidden" name="_method" value="DELETE">
+          <input type="hidden" name="customerId" id="customerId" value="{{customerId}}" />
+          <button type="submit" class="btn btn-danger btn-block btn-sm">Borrar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  {{else}}
+  <div class="card mx-auto">
+    <div class="card-body">
+      <h1>Hola {{user.name}}</h1>
+      <p clsss="lead">El socio no tiene notas registradas.</p>
+      <a href="/customers/add-note/{{customerId}}" class="btn btn-success btn-block">Crear nota</a>
+    </div>
+  </div>
+  {{/each}}
+</div>

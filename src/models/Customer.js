@@ -4,8 +4,10 @@ var mongoosePaginate = require('mongoose-paginate-v2');
 const CustomerSchema = new Schema({
   name:           { type: String, required: true, trim: true },
   lastName:       { type: String, required: true, trim: true },
-  dni:            { type: Number, required: true, unique: true },
+  dni:            { type: String, required: true, unique: true, trim: true },
   email:          { type: String },
+  address:        { type: String },
+  phone:          { type: String },
   createdBy:      { type: Schema.Types.ObjectId, ref: 'User'},
   updatedBy:      { type: Schema.Types.ObjectId, ref: 'User'},
   registerDate :  { type: Date },
@@ -16,8 +18,10 @@ const CustomerSchema = new Schema({
   nDaysTaked:     { type: Number },
   nDaysLeft:      { type: Number },
   nDaysFreezing:  { type: Number },
+  amountTotal:    { type: Number },
+  amountPayed:    { type: Number },
   state:          { type: Boolean },
-  deleted:        { type: Boolean },
+  deleted:        { type: Boolean }
 },{
   timestamps: true
 },{

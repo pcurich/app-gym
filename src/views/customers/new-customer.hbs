@@ -7,13 +7,13 @@
         <div class="form-group col-md-6">
           <label for="name" class="col-sm-3 col-form-label">Nombre</label>
           <div class="col-sm-9">
-            <input type="text" class="form-control form-control-sm" id="name" name="name">
+            <input type="text" class="form-control form-control-sm" id="name" name="name" autocomplete="off" />
           </div>
         </div>
         <div class="form-group col-md-6">
           <label for="lastName" class="col-sm-3 col-form-label">Apellidos</label>
           <div class="col-sm-9">
-            <input type="text" class="form-control form-control-sm" id="lastName" name="lastName">
+            <input type="text" class="form-control form-control-sm" id="lastName" name="lastName" autocomplete="off" />
           </div>
         </div>
       </div>
@@ -22,13 +22,28 @@
         <div class="form-group col-md-6">
           <label for="dni" class="col-sm-3 col-form-label">Dni</label>
           <div class="col-sm-9">
-            <input type="text" class="form-control form-control-sm" id="dni" name="dni">
+            <input type="text" class="form-control form-control-sm" id="dni" name="dni" autocomplete="off" />
           </div>
         </div>
         <div class="form-group col-md-6">
           <label for="email" class="col-sm-3 col-form-label">Correo</label>
           <div class="col-sm-9">
-            <input type="text" class="form-control form-control-sm" id="email" name="email">
+            <input type="text" class="form-control form-control-sm" id="email" name="email" autocomplete="off" />
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="phone" class="col-sm-3 col-form-label">Telefono</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control form-control-sm" id="phone" name="phone" autocomplete="off" />
+          </div>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="address" class="col-sm-3 col-form-label">Direccion</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control form-control-sm" id="address" name="address" autocomplete="off" />
           </div>
         </div>
       </div>
@@ -38,20 +53,27 @@
           <label for="currentProduct" class="col-sm-3 col-form-label">Plan</label>
           <div class="col-sm-9">
             <select class="form-control" id="currentProduct" name="currentProduct">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
+              {{#each products as |p|}}
+              <option value={{p._id}}>{{p.name}}</option>
+              {{/each}}
             </select>
           </div>
         </div>
         <div class="form-group col-md-6">
           <label for="startDate" class="col-sm-3 col-form-label">Fecha Inicio</label>
           <div class="col-sm-9">
-            <input type="date" class="form-control form-control-sm" id="startDate" name="startDate">
+            <input type="datetime-local" class="form-control " id="startDate" name="startDate">
           </div>
         </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="state" class="col-sm-6 col-form-label">Estado</label>
+          <div class="col-sm-6">
+            <input type="checkbox" id="state" name="state" checked />
+          </div>
+        </div> 
       </div>
 
       <div class="form-group">
@@ -61,3 +83,4 @@
     </form>
   </div>
 </div>
+

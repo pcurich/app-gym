@@ -1,50 +1,75 @@
-<div class="container pt-5">
   <div class="row">
-{{#each customers }}
-<div class="col-4">
+  {{#each customers }}
   {{#if state}}
-  <div class="card border-success mb-3">
-    <div class="card-header">{{name}} {{lastName}}</div>
-    <div class="card-body">
-      <h4 class="card-title">{{dni}}</h4>
-      <p class="card-text">Inicio: {{startDate}} Fin:{{endDate}}</p>
-      <div class="progress">
-        <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+  <div class="col-4">
+    <div class="card border-success mb-3">
+      <div class="card-header">{{name}} {{lastName}}</div>
+      <div class="card-body">
+        <h4 class="card-title">{{dni}}</h4>
+        {{#if startDate}}
+          <p class="card-text" style="display: flex; justify-content: space-between;"><b>Inicio </b><code>{{moment startDate  local=true format="YYYY-MM-DD HH:mm:ss"}}</code></p>
+        {{/if}}
+        {{#if endDate}}
+          <p class="card-text" style="display: flex; justify-content: space-between;"><b>Fin </b><code>{{moment endDate local=true format="YYYY-MM-DD HH:mm:ss"}}</code></p>
+        {{/if}}
+        {{#if currentProduct}}
+          <p class="card-text" style="display: flex; justify-content: space-between;"><b>Plan </b><code>{{currentProduct.name}}</code> </p>
+        {{/if}}
+        {{#if phone}}
+          <p class="card-text" style="display: flex; justify-content: space-between;"><b>Telefono </b><code>{{phone}}</code> </p>
+        {{/if}}
+        {{#if currentProduct}}
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: {{progress nDaysTaked nDaysTotal}}%;" aria-valuenow="{{nDaysTaked}}" aria-valuemin="0" aria-valuemax="{{nDaysTotal}}"></div>
+        </div>
+        {{/if}}
       </div>
-    </div>
-    <div class="card-footer text-muted row">
-      <div class="col-6">
-        <a href="/customers/edit/{{_id}}" class="btn btn-success">Editar</a>
+      <div class="card-footer text-muted row" style="background-color:transparent !important">
+        <div class="row">
+          <div class="col-3"><a class="btn btn-default" href="/customers/edit/{{_id}}">Editar</a></div>
+          <div class="col-3"><form action="/queries/history" method="POST"><input type="hidden" name="dni" id="dni" value="{{dni}}" ><button type="submit" class="btn btn-primary">Plan</button></form></div>      
+          <div class="col-3"><a class="btn btn-success" href="/customers/payments/{{_id}}/{{currentProduct._id}}">Pagos</a></div>     
+          <div class="col-3"><a class="btn btn-info" href="/customers/notes/{{_id}}">Notas</a></div>
+        </div> 
       </div>
-      <div class="col-6">
-        <a href="#" class="btn btn-primary">Plan</a>
-      </div>      
     </div>
   </div>
   {{else}}
-  <div class="card border-danger mb-3">
-    <div class="card-header">{{name}} {{lastName}}</div>
-    <div class="card-body">
-      <h4 class="card-title">{{dni}}</h4>
-      <p class="card-text">Inicio: {{startDate}} Fin:{{endDate}}</p>
-      <div class="progress">
-        <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+    <div class="col-4">
+      <div class="card border-danger mb-3">
+        <div class="card-header">{{name}} {{lastName}}</div>
+        <div class="card-body">
+          <h4 class="card-title">{{dni}}</h4>
+          {{#if startDate}}
+            <p class="card-text" style="display: flex; justify-content: space-between;"><b>Inicio </b><code>{{moment startDate format="YYYY-MM-DD"}}</code></p>
+          {{/if}}
+          {{#if endDate}}
+            <p class="card-text" style="display: flex; justify-content: space-between;"><b>Fin </b><code>{{moment endDate format="YYYY-MM-DD"}}</code></p>
+          {{/if}}
+          {{#if currentProduct}}
+            <p class="card-text" style="display: flex; justify-content: space-between;"><b>Plan </b><code>{{currentProduct.name}}</code> </p>
+          {{/if}}
+          {{#if phone}}
+            <p class="card-text" style="display: flex; justify-content: space-between;"><b>Telefono </b><code>{{phone}}</code> </p>
+          {{/if}}
+          {{#if currentProduct}}
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: {{progress nDaysTaked nDaysTotal}}%;" aria-valuenow="{{nDaysTaked}}" aria-valuemin="0" aria-valuemax="{{nDaysTotal}}"></div>
+          </div>
+          {{/if}}
+        </div>
+        <div class="card-footer text-muted row" style="background-color:transparent !important">
+          <div class="row">
+            <div class="col-3"><a href="/customers/edit/{{_id}}" class="btn btn-default">Editar</a></div>
+            <div class="col-3"><form action="/queries/history" method="POST"><input type="hidden" name="dni" id="dni" value="{{dni}}" ><button type="submit" class="btn btn-primary">Plan</button></form></div>      
+            <div class="col-3"><a class="btn btn-success" href="/customers/payments/{{_id}}/{{currentProduct._id}}">Pagos</a></div>
+            <div class="col-3"><a class="btn btn-info" href="/customers/notes/{{_id}}">Notas</a></div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="card-footer text-muted row">
-      <div class="col-6">
-        <a href="/customers/edit/{{_id}}" class="btn btn-success">Editar</a>
-      </div>
-      <div class="col-6">
-        <a href="#" class="btn btn-primary">Plan</a>
-      </div>      
-    </div>
-  </div>
   {{/if}}
-    
-  </div>
 {{/each}}
-  </div>
 </div>
 
 

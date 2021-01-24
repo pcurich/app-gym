@@ -1,30 +1,54 @@
-<div class="container">
-  <div class="pagination justify-content-center">
-    <li class="page-item"><a class="page-link" href="/customers/A">A</a></li>
-    <li class="page-item"><a class="page-link" href="/customers/B">B</a></li>
-    <li class="page-item"><a class="page-link" href="/customers/C">C</a></li>
-    <li class="page-item"><a class="page-link" href="/customers/D">D</a></li>
-    <li class="page-item"><a class="page-link" href="/customers/E">E</a></li>
-    <li class="page-item"><a class="page-link" href="/customers/F">F</a></li>
-    <li class="page-item"><a class="page-link" href="/customers/G">G</a></li>
-    <li class="page-item"><a class="page-link" href="/customers/H">H</a></li>
-    <li class="page-item"><a class="page-link" href="/customers/I">I</a></li>
-    <li class="page-item"><a class="page-link" href="/customers/J">J</a></li>
-    <li class="page-item"><a class="page-link" href="/customers/K">K</a></li>
-    <li class="page-item"><a class="page-link" href="/customers/L">L</a></li>
-    <li class="page-item"><a class="page-link" href="/customers/M">M</a></li>
-    <li class="page-item"><a class="page-link" href="/customers/N">N</a></li>
-    <li class="page-item"><a class="page-link" href="/customers/Ñ">Ñ</a></li>
-    <li class="page-item"><a class="page-link" href="/customers/O">O</a></li>
-    <li class="page-item"><a class="page-link" href="/customers/P">P</a></li>
-    <li class="page-item"><a class="page-link" href="/customers/Q">Q</a></li>
-    <li class="page-item"><a class="page-link" href="/customers/R">R</a></li>
-    <li class="page-item"><a class="page-link" href="/customers/S">S</a></li>
-    <li class="page-item"><a class="page-link" href="/customers/T">T</a></li>
-    <li class="page-item"><a class="page-link" href="/customers/U">U</a></li>
-    <li class="page-item"><a class="page-link" href="/customers/V">V</a></li>
-    <li class="page-item"><a class="page-link" href="/customers/W">W</a></li>
-    <li class="page-item"><a class="page-link" href="/customers/X">X</a></li>
-    <li class="page-item"><a class="page-link" href="/customers/Z">Z</a></li>
+  <div class="jumbotron">
+    <div class="container p-2">
+      <form action="/customers/search/" method="POST">
+        <div class="form-group row">
+          <label for="dni" class="col-sm-1 col-form-label">Dni</label>
+          <div class="col-sm-5">
+            <input type="text" name="dni" id="dni" class="form-control" style="border-bottom-color: black; border-bottom-width: 1px;" placeholder="00000000" >
+          </div>
+          <label for="dni" class="col-sm-1 col-form-label">Estado</label>
+          <div class="col-sm-3">
+            <select class="form-control" id="type" name="type">
+              <option value="">------</option>
+              <option value="w">Con PLan</option>
+              <option value="wo">Sin Plan</option>
+            </select>
+          </div>
+          <div class="col-sm-2">
+            <button type="submit" class="btn btn-primary">Buscar</button>
+          </div>
+        </div>
+        <div class="form-group row">
+        <div class="pagination justify-content-center">
+            <li class="page-item"><a class="page-link" href="/customers/search/A">A</a></li>
+            <li class="page-item"><a class="page-link" href="/customers/search/B">B</a></li>
+            <li class="page-item"><a class="page-link" href="/customers/search/C">C</a></li>
+            <li class="page-item"><a class="page-link" href="/customers/search/D">D</a></li>
+            <li class="page-item"><a class="page-link" href="/customers/search/E">E</a></li>
+            <li class="page-item"><a class="page-link" href="/customers/search/F">F</a></li>
+            <li class="page-item"><a class="page-link" href="/customers/search/G">G</a></li>
+            <li class="page-item"><a class="page-link" href="/customers/search/H">H</a></li>
+            <li class="page-item"><a class="page-link" href="/customers/search/I">I</a></li>
+            <li class="page-item"><a class="page-link" href="/customers/search/J">J</a></li>
+            <li class="page-item"><a class="page-link" href="/customers/search/K">K</a></li>
+            <li class="page-item"><a class="page-link" href="/customers/search/L">L</a></li>
+            <li class="page-item"><a class="page-link" href="/customers/search/M">M</a></li>
+            <li class="page-item"><a class="page-link" href="/customers/search/N">N</a></li>
+            <li class="page-item"><a class="page-link" href="/customers/search/Ñ">Ñ</a></li>
+            <li class="page-item"><a class="page-link" href="/customers/search/O">O</a></li>
+            <li class="page-item"><a class="page-link" href="/customers/search/P">P</a></li>
+            <li class="page-item"><a class="page-link" href="/customers/search/Q">Q</a></li>
+            <li class="page-item"><a class="page-link" href="/customers/search/R">R</a></li>
+            <li class="page-item"><a class="page-link" href="/customers/search/S">S</a></li>
+            <li class="page-item"><a class="page-link" href="/customers/search/T">T</a></li>
+            <li class="page-item"><a class="page-link" href="/customers/search/U">U</a></li>
+            <li class="page-item"><a class="page-link" href="/customers/search/V">V</a></li>
+            <li class="page-item"><a class="page-link" href="/customers/search/W">W</a></li>
+            <li class="page-item"><a class="page-link" href="/customers/search/X">X</a></li>
+            <li class="page-item"><a class="page-link" href="/customers/search/Y">Y</a></li>
+            <li class="page-item"><a class="page-link" href="/customers/search/Z">Z</a></li>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
-</div> 

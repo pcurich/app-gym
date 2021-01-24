@@ -1,0 +1,101 @@
+{{> searchCustomer}}
+
+{{#if customer}}
+<div class="card border-secondary mb-3">
+  <div class="card-header">Resumen de planes</div>
+  <div class="card-body">
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="name" class="col-sm-6 col-form-label">Nombre</label>
+        <div class="col-sm-12">
+          <code>{{customer.name}}</code>
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="lastName" class="col-sm-6 col-form-label">Apellidos</label>
+        <div class="col-sm-12">
+          <code>{{customer.lastName}}</code>
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="dni" class="col-sm-6 col-form-label">Dni</label>
+        <div class="col-sm-12">
+          <code>{{customer.dni}}</code>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="email" class="col-sm-6 col-form-label">Correo</label>
+        <div class="col-sm-12">
+          <code>{{customer.email}}</code>
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="email" class="col-sm-6 col-form-label">Teléfono</label>
+        <div class="col-sm-12">
+          <code>{{customer.phone}}</code>
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="email" class="col-sm-6 col-form-label">Dirección</label>
+        <div class="col-sm-12">
+          <code>{{customer.address}}</code>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="dni" class="col-sm-6 col-form-label">Socio desde</label>
+        <div class="col-sm-12">
+          <code>{{moment customer.registerDate local=true format="YYYY-MM-DD HH:mm:ss"}}</code>
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="email" class="col-sm-6 col-form-label">Estado</label>
+        <div class="col-sm-12">
+          <code>{{#if customer.state}} activo {{else}} Inactivo {{/if}}</code>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card border-secondary mb-3">
+  <div class="card-header">Planes historicos</div>
+  <div class="card-body">
+  <table class="table table-hover" style="font-size: 10px;">
+      <thead>
+        <tr>
+          <th scope="col">Plan</th>
+          <th scope="col">Precio</th>
+          <th scope="col">Duración</th>
+          <th scope="col">Secuencia</th>
+          <th scope="col">Registro</th>
+          <th scope="col">Desde</th>
+          <th scope="col">Hasta</th>
+          <th scope="col">Pagos</th>
+          <th scope="col">Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each customer.history as |p| }}
+        <tr class="table">
+          <td>{{p.productId.name}}</td>
+          <td>S/ {{p.productId.price}}</td>
+          <td>{{p.productId.duration}}</td>
+          <td>{{p.productId.sequence}}</td>
+          <td>{{moment p.registerDate local=true format="YYYY-MM-DD HH:mm:ss"}}</td>
+          <td>{{moment p.startDate local=true format="YYYY-MM-DD HH:mm:ss"}}</td>
+          <td>{{moment p.endDate local=true format="YYYY-MM-DD HH:mm:ss"}}</td>
+          <td><a class="btn btn-success" href="/customers/payments/{{customerId}}/{{p.productId._id}}">Ver</a></td>
+          <td class="{{#if p.state}} table-success {{else}} table-danger{{/if}}">{{#if p.state}} Activo {{else}} {{moment p.cancelDate local=true format="YYYY-MM-DD HH:mm:ss"}} {{/if}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>
+{{/if}}

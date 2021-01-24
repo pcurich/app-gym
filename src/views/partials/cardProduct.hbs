@@ -11,8 +11,16 @@
       <p class="card-text">Duración: {{duration}} {{sequence}}</p>
     </div>
     <div class="card-footer">
-      <div class="col-6">
-        <a href="/products/edit/{{_id}}" class="btn btn-success">Editar</a>
+      <div class="row">
+        <div class="col-6">
+          <a href="/products/edit/{{_id}}" class="btn btn-success">Editar</a>
+        </div>
+        <div class="col-6">
+          <form action="/products/delete/{{_id}}?_method=DELETE" method="POST">
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit" class="btn btn-danger">Borrar</button>
+          </form>
+        </div> 
       </div>
     </div>
   </div>
@@ -25,8 +33,16 @@
       <p class="card-text">Duración: {{duration}} {{sequence}}</p>
     </div>
     <div class="card-footer">
-      <div class="col-6">
-        <a href="/products/edit/{{_id}}" class="btn btn-success">Editar</a>
+      <div class="row">
+        <div class="col-6">
+          <a href="/products/edit/{{_id}}" class="btn btn-success">Editar</a>
+        </div>
+        <div class="col-6">
+          <form action="/products/delete/{{_id}}?_method=DELETE" method="POST">
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit" class="btn btn-danger">Borrar</button>
+          </form>
+        </div> 
       </div>
     </div>
   </div>

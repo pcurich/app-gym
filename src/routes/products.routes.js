@@ -7,8 +7,8 @@ const {
   createNewProduct,
   renderProducts,
   renderEditForm,
-  updateProduct
-  
+  updateProduct,
+  deleteProduct  
 } = require("../controllers/products.controller");
 
 // Helpers
@@ -24,5 +24,8 @@ router.get("/products", isAuthenticated, renderProducts);
 // Edit Notes
 router.get("/products/edit/:id", isAuthenticated, renderEditForm);
 router.put("/products/edit-product/:id", isAuthenticated, updateProduct);
+
+// Delete Notes
+router.delete("/products/delete/:id", isAuthenticated, deleteProduct);
 
 module.exports = router;

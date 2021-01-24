@@ -1,0 +1,82 @@
+{{> searchCustomer}}
+
+{{#if customer}}
+<div class="card border-secondary mb-3">
+  <div class="card-header">Resumen</div>
+  <div class="card-body">
+
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="name" class="col-sm-6 col-form-label">Nombre</label>
+        <div class="col-sm-12">
+          <code>{{customer.name}}</code>
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="lastName" class="col-sm-6 col-form-label">Apellidos</label>
+        <div class="col-sm-12">
+          <code>{{customer.lastName}}</code>
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="lastName" class="col-sm-6 col-form-label">Estado</label>
+        <div class="col-sm-12">
+          <code>{{#if customer.state}} Activo {{else}} Inactivo {{/if}}</code>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="name" class="col-sm-6 col-form-label">Plan</label>
+        <div class="col-sm-12">
+          <code>{{customer.currentProduct.name}} ({{customer.currentProduct.duration}} {{customer.currentProduct.sequence}})</code>
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="lastName" class="col-sm-6 col-form-label">Inicio</label>
+        <div class="col-sm-12">
+          <code>{{#if customer.startDate}} {{moment customer.startDate  format="YYYY-MM-DD HH:mm:ss"}} {{/if}}</code>
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="lastName" class="col-sm-6 col-form-label">Fin</label>
+        <div class="col-sm-12">
+          <code>{{#if customer.endDate}} {{moment customer.endDate local=true format="YYYY-MM-DD HH:mm:ss" }} {{/if}}</code>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>  
+
+<div class="card border-secondary mb-3">
+  <div class="card-header">Entradas</div>
+  <div class="card-body">
+    <div class="row">
+      
+      <div class="col-2">
+        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+          {{#each customer.asistence as |a|}}
+          <a class="nav-link" id="v-pills-{{a.group}}-tab" data-toggle="pill" href="#v-pills-{{a.group}}" role="tab" aria-controls="v-pills-{{a.group}}" aria-selected="false">{{a.group}}  -  <span class="badge badge-primary">{{a.length}} </span></a>
+          {{/each}}
+        </div>
+      </div>
+      
+      <div class="col-10">
+        <div class="tab-content" id="v-pills-tabContent">
+          {{#each customer.asistence as |a| }}
+          <div class="tab-pane fade" id="v-pills-{{a.group}}" role="tabpanel" aria-labelledby="v-pills-{{a.group}}-tab">
+            <div class="row row-cols-6">
+              {{#each a.list as |l|}}
+                <div class="col">{{moment l local=true format="YYYY-MM-DD HH:mm:ss"}}</div>
+              {{/each}}
+            </div>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{/if}}
