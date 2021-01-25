@@ -8,10 +8,10 @@ const createAdminUser = async () => {
   const newUser = new User({
     username: "admin",
     name: 'Pedro Curich',
-    email: "1@1",
+    email: "1@11",
   });
 
-  newUser.password = await newUser.encryptPassword("Sa123456Sa");
+  newUser.password = await newUser.encryptPassword("123");
   const admin = await newUser.save();
   console.log("Admin user created", admin);
 };

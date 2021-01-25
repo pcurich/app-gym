@@ -17,3 +17,71 @@
       </form>
     </div>
   </div>
+
+  {{#if payments}}
+  
+  <div class="container">
+    <div class="row row-col-4">
+      <div class="col">
+        <div class="card text-white bg-success mb-3">
+          <div class="card-header">Efectivo</div>
+          <div class="card-body">
+            <h4 class="card-title">S/ {{cash}}</h4>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card text-white bg-info mb-3">
+          <div class="card-header">Tarjeta</div>
+          <div class="card-body">
+            <h4 class="card-title">S/ {{credit}}</h4>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card text-white bg-warning  mb-3">
+          <div class="card-header">Otros</div>
+          <div class="card-body">
+            <h4 class="card-title">S/ {{other}}</h4>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card  bg-secondary mb-3">
+          <div class="card-header">Total</div>
+          <div class="card-body">
+            <h4 class="card-title">S/ {{total}}</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="jumbotron">
+  <table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Plan</th>
+      <th scope="col">Socio</th>
+      <th scope="col">Usuario</th>
+      <th scope="col">Fecha</th>
+      <th scope="col">Monto</th>
+      <th scope="col">Método de pago</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each payments as |p|}}
+    <tr>
+      <td class="{{#if p.productId.state}}table-success{{else}}table-danger{{/if}}">{{p.productId.name}}</td>
+      <td>{{p.customerId.name}} {{p.customerId.lastName}} </td>
+      <td>{{p.createdBy.name}} </td>
+      <td>{{moment p.createdAt local=true format="YYYY-DD-MM HH:mm:ss"}} </td>
+      <td>S/ {{p.amountPayed}} </td>
+      <td>{{p.type}} </td>
+    </tr>
+    {{/each}}
+</tbody>
+</table>
+</div>
+  
+  {{/if}}

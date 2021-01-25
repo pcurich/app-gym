@@ -51,7 +51,7 @@ ctrl.renderProducts = async (req, res) => {
 }
 
 ctrl.renderEditForm = async (req, res) => {
-  const product = await Product.findById(req.params.id).lean();
+  const product = await Product.findById(req.params.id).populate('createdBy').populate('updatedBy').lean();
   res.render("products/edit-product", { product });
 };
 

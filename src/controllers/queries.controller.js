@@ -5,7 +5,9 @@ const Customer = require("../models/Customer");
 const History = require("../models/History");
 const Assistance = require("../models/Assistance")
 const moment = require("moment");
-var ObjectId = require('mongodb').ObjectID
+var ObjectId = require('mongodb').ObjectID;
+const Payment = require("../models/Payment");
+const { populate } = require("../models/Customer");
 
 ctrl.renderCustomerHistoryForm =  (req,res) => {
   res.render('queries/customer-history', { nextStep:'history' });
@@ -13,6 +15,41 @@ ctrl.renderCustomerHistoryForm =  (req,res) => {
 
 ctrl.renderCustomerCheckForm =  (req,res) => {
   res.render('queries/customer-check', { nextStep:'check' });
+}
+
+ctrl.renderPaymentsForm =  (req, res) => {
+  res.render('queries/payments');
+}
+
+ctrl.renderPayments = async (req, res) => {
+  const {from, to} = req.body;
+  console.log({'from':(new Date(from)).toISOString(),'to':(new Date(to)).toISOString()});
+  const payments = await Payment.find({
+    createdAt: {
+      $gt: (new Date(from)).toISOString(),
+      $lt: (new Date(to)).toISOString()
+  }
+  }).populate("productId").populate("customerId").populate("createdBy").sort({ createdAt: "desc" }).lean();
+  if (payments){
+    var cash = 0.0;
+    var credit = 0.0;
+    var other = 0.0;
+    await payments.forEach(e=>{
+      if(e.type == "Efectivo"){
+        cash = cash + e.amountPayed*1.0;
+      }
+      if(e.type == "Tarjeta"){
+        credit = credit + e.amountPayed*1.0;
+      }
+      if(e.type == "Otro"){
+        other = other + e.amountPayed*1.0;
+      }
+    });
+    var total = cash +credit + other;
+    res.render('queries/payments', {payments, cash, credit, other, total });
+  }else{
+    res.render('queries/payments', {payments:undefined});
+  }  
 }
 
 ctrl.renderCustomerHistory = async (req, res) => {
@@ -95,9 +132,7 @@ ctrl.renderCustomerCheck = async (req, res) => {
   }
 };
 
-ctrl.renderPaymentsForm = (req, res) => {
-  res.render('queries/payments');
-}
+
 
 unique = (arr) => {
     var u = {}, a = [];

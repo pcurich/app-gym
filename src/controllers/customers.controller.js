@@ -159,7 +159,7 @@ ctrl.renderEditForm = async (req, res) => {
   });
   products.unshift({_id:0,name:"------"});
   customer.products = products;
-  res.render("customers/edit  -customer", { customer });
+  res.render("customers/edit-customer", { customer });
 };
 
 ctrl.renderNoteEditForm =  async (req, res) => {
@@ -243,7 +243,7 @@ ctrl.paymentCustomer = async (req, res) => {
     customer.currentProduct = await Product.findById(productId).lean()
     const history = await History.findOne({productId, customerId})
     if(history){
-      
+
       customer.startDate = history.startDate;  
       customer.endDate = history.endDate;
     }
