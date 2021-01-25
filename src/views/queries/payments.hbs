@@ -1,0 +1,19 @@
+  <div class="jumbotron">
+    <div class="container p-2">
+      <form action="/queries/payments/" method="POST">
+        <div class="form-group row">
+          <label for="from" class="col-sm-1 col-form-label">Desde</label>
+          <div class="col-sm-4">
+            <input type="datetime-local" name="from" id="from" class="form-control" style="border-bottom-color: black; border-bottom-width: 1px;"  autocomplete="off">
+          </div>
+          <label for="to" class="col-sm-1 col-form-label">Hasta</label>
+          <div class="col-sm-4">
+            <input type="datetime-local" name="to" id="to" class="form-control" style="border-bottom-color: black; border-bottom-width: 1px;"  autocomplete="off">
+          </div>
+          <div class="col-sm-2">
+            <button type="submit" class="btn btn-primary">Buscar</button> 
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>

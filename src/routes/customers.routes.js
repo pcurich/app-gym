@@ -31,7 +31,7 @@ router.post("/customers/addPayment", isAuthenticated, createNewPayment);
 router.post("/customers/new-note-customer", isAuthenticated, createNewNote);
 
 // // Edit
-router.get("/customers/edit/:id", isAuthenticated, renderEditForm);
+router.get("/customers/edit-customer/:id", isAuthenticated, renderEditForm);
 router.put("/customers/edit-customer/:id", isAuthenticated, updateCustomer);
 router.get("/customers/cancel/:customerId/:productId", isAuthenticated, cancelPlanCustomer);
 router.get("/customers/payments/:customerId/:productId", isAuthenticated, paymentCustomer);

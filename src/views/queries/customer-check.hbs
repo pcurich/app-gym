@@ -47,11 +47,25 @@
       </div>
     </div>
 
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="name" class="col-sm-6 col-form-label">Valor del plan</label>
+        <div class="col-sm-12">
+          <code>S/ {{customer.amountTotal}}</code>
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="lastName" class="col-sm-6 col-form-label">Monto pagado</label>
+        <div class="col-sm-12">
+          <code>S/ {{customer.amountPayed}}</code>
+        </div>
+      </div> 
+
   </div>
 </div>  
 
 <div class="card border-secondary mb-3">
-  <div class="card-header">Entradas</div>
+  <div class="card-header">Ingresos <a class="btn btn-success" style="float: right;" href="/queries/check-in/{{customer._id}}/{{customer.currentProduct._id}}">Asistencia</a></div>
   <div class="card-body">
     <div class="row">
       

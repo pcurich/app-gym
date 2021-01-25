@@ -7,11 +7,11 @@ const Assistance = require("../models/Assistance")
 const moment = require("moment");
 var ObjectId = require('mongodb').ObjectID
 
-ctrl.renderCustomerHistoryForm = async (req,res) => {
+ctrl.renderCustomerHistoryForm =  (req,res) => {
   res.render('queries/customer-history', { nextStep:'history' });
 }
 
-ctrl.renderCustomerCheckForm = async (req,res) => {
+ctrl.renderCustomerCheckForm =  (req,res) => {
   res.render('queries/customer-check', { nextStep:'check' });
 }
 
@@ -33,43 +33,52 @@ ctrl.renderCustomerHistory = async (req, res) => {
   }  
 };
 
+ctrl.renderCustomerCheckIn = async (req, res) => {
+  const { customerId, productId } = req.params;
+
+  const assistance = new Assistance({ 
+    productId: ObjectId(productId), customerId: ObjectId(customerId),
+    createdBy: ObjectId(req.user.id), updatedBy: ObjectId(req.user.id), entryDate: new Date()
+  });
+  assistance.save();
+  req.flash("success_msg", "Asistencia registrada");   
+  res.redirect("/queries/check");
+} 
+
 ctrl.renderCustomerCheck = async (req, res) => {
   const { dni } = req.body;
   if(dni && dni!="" ){    
     try {
-      console.log("antes");
       const customer = await Customer.findOne( { dni, deleted: false}).populate("currentProduct").lean();
-      console.log("customer="+customer);
       if (customer){
-        const assistance = new Assistance({ 
-          productId: ObjectId(customer.currentProduct._id), customerId: ObjectId(customer._id),
-          createdBy: ObjectId(req.user.id), updatedBy: ObjectId(req.user.id), entryDate: new Date()
-        });
-        assistance.save();
-        console.log(assistance);
-        var groupAsisitence = [];
-        var tmp = []
-        var asistence = await Assistance.find({  productId: ObjectId(customer.currentProduct._id), customerId: ObjectId(customer._id)}).sort({ entryDate: "desc" }).lean();
-
-        asistence.forEach(e => {
-          tmp.push(moment(e.entryDate).format('YYYY-MM'))
-        });
-        tmp = unique(tmp);
-
-        tmp.forEach(x=>{
-          var t = [];
+        if(customer.currentProduct){
+          var groupAsisitence = [];
+          var tmp = []
+          var asistence = await Assistance.find({  productId: ObjectId(customer.currentProduct._id), customerId: ObjectId(customer._id)}).sort({ entryDate: "desc" }).lean();
+  
           asistence.forEach(e => {
-            if (x == moment(e.entryDate).format('YYYY-MM')){
-              t.push(e.entryDate)
-            }
+            tmp.push(moment(e.entryDate).format('YYYY-MM'))
           });
-          groupAsisitence.push({group:x, list:t, length: t.length })
-        })
-        
-        customer.asistence=groupAsisitence
-        req.flash("success_msg", "Asistencia registrada");
-        customer.dni = "";       
-        res.render("queries/customer-check", { customer, nextStep:'check' });
+          tmp = unique(tmp);
+  
+          tmp.forEach(x=>{
+            var t = [];
+            asistence.forEach(e => {
+              if (x == moment(e.entryDate).format('YYYY-MM')){
+                t.push(e.entryDate)
+              }
+            });
+            groupAsisitence.push({group:x, list:t, length: t.length })
+          })
+          
+          customer.asistence=groupAsisitence
+          req.flash("success_msg", "Asistencia registrada");
+          customer.dni = "";       
+          res.render("queries/customer-check", { customer, nextStep:'check' });
+        }else{
+          req.flash("error_msg", "El socio no cuenta con un plan activo");
+          res.redirect("/queries/check");
+        }
       }else{
         req.flash("error_msg", "El Dni ingresado no se encuentra registrado");
         res.redirect("/queries/check");
@@ -85,6 +94,10 @@ ctrl.renderCustomerCheck = async (req, res) => {
     res.redirect("/queries/check");
   }
 };
+
+ctrl.renderPaymentsForm = (req, res) => {
+  res.render('queries/payments');
+}
 
 unique = (arr) => {
     var u = {}, a = [];
